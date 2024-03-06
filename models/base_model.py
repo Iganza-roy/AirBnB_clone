@@ -29,8 +29,7 @@ class BaseModel:
                     else:
                         self.__dict__[key] = value
         else:
-            self.id = str(uuid4())
-            self.created_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """String represntation of an object"""
