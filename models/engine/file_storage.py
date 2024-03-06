@@ -40,5 +40,5 @@ class FileStorage:
                         class_name, obj_id = key.split('.')
                         obj = eval(class_name)(**obj_dict)
                         FileStorage.__objects[key] = obj
-        except FileNotFoundError:
-            return
+        except (FileNotFoundError, json.JSONDecodeError):
+            pass
