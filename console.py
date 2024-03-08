@@ -1,22 +1,32 @@
 #!/usr/bin/python3
-"""Entry point of the command interprator"""
+"""Entry point of the command interpreter"""
 import cmd
 import json
 import models
 from models.base_model import BaseModel
-from models import storage
 from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
-    """Defines a class to the cmd interprator"""
+    """Defines a class for the command interpreter"""
 
     prompt = "(hbnb) "
 
     __classes = {
-            "BaseModel" : BaseModel,
-            "User" : User
-            }
+        "BaseModel": BaseModel,
+        "User": User,
+        "Place": Place,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Review": Review
+    }
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -28,7 +38,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
-        """Do nothing if empty line"""
+        """Do nothing if an empty line"""
         pass
 
     def parse(self, arg):
@@ -44,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
         return cls
 
     def do_create(self, arg):
-        """Creates a new instance of provided class"""
+        """Creates a new instance of the provided class"""
         if not arg:
             print("** class name missing **")
             return
@@ -70,13 +80,13 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 2:
             print("** instance id missing **")
             return
-        inst = storage.all()
+        insts = storage.all()
         key = "{}.{}".format(args[0], args[1])
 
-        if key not in inst:
+        if key not in insts:
             print("** no instance found **")
             return
-        print(inst[key])
+        print(insts[key])
 
     def do_destroy(self, arg):
         """Deletes an instance based on class name and id"""
@@ -90,15 +100,14 @@ class HBNBCommand(cmd.Cmd):
         if cls_name not in self.__classes:
             print("** class doesn't exist **")
             return
-        
+
         if len(args) < 2:
             print("** instance id missing **")
             return
 
-        inst_id  = args[1]
+        inst_id = args[1]
         insts = storage.all()
         key = "{}.{}".format(cls_name, inst_id)
-
 
         if key not in insts:
             print("** no instance found **")
@@ -106,7 +115,6 @@ class HBNBCommand(cmd.Cmd):
 
         del insts[key]
         storage.save()
-
 
     def do_all(self, arg):
         """Prints all string reps of instances"""
