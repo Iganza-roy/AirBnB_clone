@@ -13,7 +13,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_all_method(self):
         """Test the all method."""
-        self.storage._objects.clear()
+        self.storage._FileStorage__objects.clear()
         actual_result = self.storage.all()
         self.assertEqual(actual_result, {})
 
@@ -44,7 +44,7 @@ class TestFileStorage(unittest.TestCase):
 
         self.storage.save()
 
-        self.storage._objects.clear()
+        self.storage._FileStorage__objects.clear()
         self.storage.reload()
 
         self.assertIn(f"{type(obj).__name__}.{obj.id}", self.storage.all())
