@@ -9,7 +9,7 @@ class BaseModel:
     """Class that defines all common attributes/methods for other classes"""
     def __init__(self, *args, **kwargs):
         """Inits an instance of BaseModel
-        
+
         Args:
             args(any): Unused
             kwargs(dict): key/valur pairs of the attribute name
