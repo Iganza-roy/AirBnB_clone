@@ -61,6 +61,25 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(n_inst_dict['name'], 'New Name')
         self.assertEqual(n_inst_dict['my_number'], 42)
 
+    def test_save_updates_file(self):
+        """Test if calling save updates the content of the file."""
+        n_inst = BaseModel()
+        n_inst.save()
+        file_content = ""
+        with open("file.json", "r") as f:
+            file_content = f.read()
+
+        self.assertIn("BaseModel." + n_inst.id, file_content)
+
+    def test_to_dict_includes_new_attributes(self):
+        """Test if to_dict includes newly added attributes."""
+        n_inst = BaseModel()
+        n_inst.new_attribute = "New Value"
+        n_inst.save()
+        n_inst_dict = n_inst.to_dict()
+
+        self.assertIn("new_attribute", n_inst_dict)
+
 
 if __name__ == '__main__':
     unittest.main()

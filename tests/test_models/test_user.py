@@ -44,6 +44,20 @@ class TestUser(unittest.TestCase):
         user_inst.save()
         self.assertNotEqual(initl_upd_at, user_inst.updated_at)
 
+    def test_user_attributes(self):
+        user_inst = User()
+        self.assertEqual(user_inst.email, "")
+        self.assertEqual(user_inst.password, "")
+        self.assertEqual(user_inst.first_name, "")
+        self.assertEqual(user_inst.last_name, "")
+
+    def test_user_save_method(self):
+        user_inst = User()
+        initial_updated_at = user_inst.updated_at
+        user_inst.save()
+        self.assertNotEqual(initial_updated_at, user_inst.updated_at)
+        with open("file.json", "r") as f:
+            self.assertIn(f"User.{user_inst.id}", f.read())
 
 
 if __name__ == '__main__':
