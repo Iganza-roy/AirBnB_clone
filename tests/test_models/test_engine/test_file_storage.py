@@ -2,6 +2,7 @@
 """defining the testfilestorage class"""
 import unittest
 import json
+import os
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
@@ -44,10 +45,20 @@ class TestFileStorage(unittest.TestCase):
 
         self.storage.save()
 
+        os.remove(self.storage._FileStorage__file_path)
+
         self.storage._FileStorage__objects.clear()
         self.storage.reload()
 
-        self.assertIn(f"{type(obj).__name__}.{obj.id}", self.storage.all())
+        new_obj = BaseModel()
+        self.storage.new(new_obj)
+        self.storage.save()
+
+        self.storage._FileStorage__objects.clear()
+        self.storage.reload()
+
+
+        self.assertIn(f"{type(new_obj).__name__}.{new_obj.id}", self.storage.all())
 
     def test_invalid_json(self):
         """Test invalid json file"""
