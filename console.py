@@ -139,7 +139,7 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         """Updates instances based on class name and id"""
 
-        if not args:
+        if not arg:
             print("** class name missing **")
             return
 
@@ -175,6 +175,20 @@ class HBNBCommand(cmd.Cmd):
         att_val = args[3]
 
         inst = insts[key]
+
+        if hasattr(inst, att_name):
+            att_type = type(getattr(inst, att_name))
+            if att_type is str:
+                att_val = str(att_val)
+            elif att_type is int:
+                att_val = int(att_val)
+            elif att_type is float:
+                att_val = float(att_val)
+            elif att_type is list or att_type is dict:
+                try:
+                    att_val = eval(att_val)
+                except Exception:
+                    pass
 
         setattr(inst, att_name, att_val)
         inst.save()
