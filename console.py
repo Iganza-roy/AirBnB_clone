@@ -2,7 +2,6 @@
 """Entry point of the command interpreter"""
 import cmd
 import json
-import models
 from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
