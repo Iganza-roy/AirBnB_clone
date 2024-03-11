@@ -184,7 +184,7 @@ class HBNBCommand(cmd.Cmd):
 
         try:
             att_value = att_type(att_val)
-        except valueError:
+        except ValueError:
             return
 
         inst.__dict__[att_name] = att_value
