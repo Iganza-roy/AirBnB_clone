@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Defining a FileStorage class"""
 import json
+import os
 from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
@@ -37,29 +38,30 @@ class FileStorage:
 
     def reload(self):
         """Deserializes the JSON file to __objects."""
-        try:
-            with open(FileStorage.__file_path, 'r') as file:
-                ser_obj = json.load(file)
+        if os.path.exists(self._FileStorage__file_path):
+            try:
+                with open(FileStorage.__file_path, 'r') as file:
+                    ser_obj = json.load(file)
 
-                if ser_obj:
-                    for key, obj_dict in ser_obj.items():
-                        class_name, obj_id = key.split('.')
-                        if class_name == 'BaseModel':
-                            obj = BaseModel(**obj_dict)
-                        elif class_name == 'User':
-                            obj = User(**obj_dict)
-                        elif class_name == 'Place':
-                            obj = Place(**obj_dict)
-                        elif class_name == 'State':
-                            obj = State(**obj_dict)
-                        elif class_name == 'City':
-                            obj = City(**obj_dict)
-                        elif class_name == 'Amenity':
-                            obj = Amenity(**obj_dict)
-                        elif class_name == 'Review':
-                            obj = Review(**obj_dict)
-                        else:
-                            continue
-                        FileStorage.__objects[key] = obj
-        except (FileNotFoundError, json.JSONDecodeError):
-            pass
+                    if ser_obj:
+                        for key, obj_dict in ser_obj.items():
+                            class_name, obj_id = key.split('.')
+                            if class_name == 'BaseModel':
+                                obj = BaseModel(**obj_dict)
+                            elif class_name == 'User':
+                                obj = User(**obj_dict)
+                            elif class_name == 'Place':
+                                obj = Place(**obj_dict)
+                            elif class_name == 'State':
+                                obj = State(**obj_dict)
+                            elif class_name == 'City':
+                                obj = City(**obj_dict)
+                            elif class_name == 'Amenity':
+                                obj = Amenity(**obj_dict)
+                            elif class_name == 'Review':
+                                obj = Review(**obj_dict)
+                            else:
+                                continue
+                            self._FileStorage__objects[key] = obj
+            except (FileNotFoundError, json.JSONDecodeError):
+                pass
