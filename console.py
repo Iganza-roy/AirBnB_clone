@@ -193,6 +193,18 @@ class HBNBCommand(cmd.Cmd):
         setattr(inst, att_name, att_val)
         inst.save()
 
+    def default(self, other):
+        """Default method for custom commands"""
+        args = other.split(".")
+        custom = args[1]
+        if len(args) == 2 and custom == "all()":
+            cls_name = args[0]
+            if cls_name in self.__classes:
+                self.do_all(cls_name)
+                return
+        return super().default(other)
+
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
