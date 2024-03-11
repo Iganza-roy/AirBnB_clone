@@ -9,7 +9,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-from models.engine.file_storage import FileStorage
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -138,12 +138,12 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         """Updates instances based on class name and id"""
-        args = arg.split()
 
         if not args:
             print("** class name missing **")
             return
 
+        args = arg.split()
         cls_name = args[0]
 
         if cls_name not in self.__classes:
@@ -176,19 +176,8 @@ class HBNBCommand(cmd.Cmd):
 
         inst = insts[key]
 
-        if att_name not in inst.__dict__:
-            return
-
-        att_type = type(inst.__dict__[att_name])
-
-        try:
-            att_value = att_type(att_val)
-        except valueError:
-            return
-
-        inst.__dict__[att_name] = att_value
+        setattr(inst, att_name, att_val)
         inst.save()
-        storage.save()
 
 
 if __name__ == '__main__':
