@@ -188,6 +188,7 @@ class HBNBCommand(cmd.Cmd):
 
         inst.__dict__[att_name] = att_value
         inst.save()
+        storag.new(inst)
         storage.save()
 
 
