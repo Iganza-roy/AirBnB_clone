@@ -217,6 +217,13 @@ class HBNBCommand(cmd.Cmd):
                 self.do_show(f"{cls_name} {inst_id}")
                 return
 
+        elif len(args) == 2 and custom.startswith("destroy(") and custom.endswith(")"):
+            cls_name = args[0]
+            if cls_name in self.__classes:
+                inst_id = custom.split('(')[1][:-1]
+                self.do_destroy(f"{cls_name} {inst_id}")
+                return
+
         return super().default(other)
 
 
