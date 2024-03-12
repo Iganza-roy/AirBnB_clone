@@ -227,10 +227,10 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 3 and custom.startswith("update(") and custom.endswith(")"):
             cls_name = args[0]
             if cls_name in self.__classes:
-                inst_id, att_name, att_value = custom.split('(')[1][:-1].split(',')
-                inst_id = inst_id.strip()
-                att_name = att_name.strip()
-                att_value = att_value.strip()
+                cmd_args = custom.split('(', 1)[1][:-1].rsplit(',', 2)
+                inst_id = cmd_args[0].strip()
+                att_name = cmd_args[1].strip()
+                att_value = cmd_args[2].strip()
                 self.do_update(f"{cls_name} {inst_id} {att_name} {att_value}")
                 return
 
