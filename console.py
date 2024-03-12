@@ -202,6 +202,7 @@ class HBNBCommand(cmd.Cmd):
             if cls_name in self.__classes:
                 self.do_all(cls_name)
                 return
+ 
         elif len(args) == 2 and custom == "count()":
             cls_name = args[0]
             if cls_name in self.__classes:
@@ -209,8 +210,14 @@ class HBNBCommand(cmd.Cmd):
                 print(count)
                 return
 
-        return super().default(other)
+        elif len(args) == 2 and custom.startswith("show(") and custom.endswith(")"):
+            cls_name = args[0]
+            if cls_name in self.__classes:
+                inst_id = custom.split('(')[1][:-1]
+                self.do_show(f"{cls_name} {inst_id}")
+                return
 
+        return super().default(other)
 
 
 if __name__ == '__main__':
