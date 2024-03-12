@@ -224,7 +224,7 @@ class HBNBCommand(cmd.Cmd):
                 self.do_destroy(f"{cls_name} {inst_id}")
                 return
 
-        elif len(args) == 3 and custom.startswith("update(") and custom.endswith(")"):
+        elif len(args) == 2 and custom.startswith("update(") and custom.endswith(")"):
             cls_name = args[0]
             if cls_name in self.__classes:
                 cmd_args = custom.split('(', 1)[1][:-1].rsplit(',', 2)
