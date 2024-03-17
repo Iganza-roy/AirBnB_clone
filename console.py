@@ -202,7 +202,6 @@ class HBNBCommand(cmd.Cmd):
             if cls_name in self.__classes:
                 self.do_all(cls_name)
                 return
- 
         elif len(args) == 2 and custom == "count()":
             cls_name = args[0]
             if cls_name in self.__classes:
