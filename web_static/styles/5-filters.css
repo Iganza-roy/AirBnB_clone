@@ -22,3 +22,26 @@ section.filters button {
 
 section.filters button:hover{
 	opacity: 0.9;
+}
+
+.filters div{
+	display: inline-block;
+	position: relative;
+	height: 100%;
+	width: 25%;
+	margin-left: 4%;
+	line-height: 6px;
+}
+
+.locations{
+	border-right: 1px solid #DDDDDD;
+}
+
+.filters h3{
+	font-weight: 600;
+}
+
+.filters h4{
+	font-weight: 400;
+	font-size: 14px;
+}
