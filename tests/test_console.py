@@ -21,7 +21,7 @@ Documented commands (type help <topic>):
 ========================================
 EOF  all  create  destroy  help  quit  show  update
 
-"""     
+"""
         self.assertEqual(s, f.getvalue())
 
     def test_show_command_no_args(self):
@@ -91,14 +91,16 @@ EOF  all  create  destroy  help  quit  show  update
     def test_emptyline_method(self):
         """Tests if the emptyline method exists and doesn't raise errors."""
         console = HBNBCommand()
-        self.assertTrue(hasattr(console, 'emptyline'))  # Check if the method exists
+        self.assertTrue(hasattr(console, 'emptyline'))
         console.emptyline()
 
     @patch('models.engine.file_storage.FileStorage')
     def test_update_basemodel(self, mock_all):
         """Tests updating a BaseModel instance with the update command."""
         base_model_dict = {"id": "45678", "name": "New Name"}
-        mock_all.return_value = {"BaseModel.45678": BaseModel(**base_model_dict)}
+        mock_all.return_value = {
+                "BaseModel.45678": BaseModel(**base_model_dict)
+                }
 
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("update BaseModel 45678 name New Name")

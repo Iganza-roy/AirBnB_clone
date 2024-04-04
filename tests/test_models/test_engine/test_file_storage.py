@@ -57,8 +57,10 @@ class TestFileStorage(unittest.TestCase):
         self.storage._FileStorage__objects.clear()
         self.storage.reload()
 
-
-        self.assertIn(f"{type(new_obj).__name__}.{new_obj.id}", self.storage.all())
+        self.assertIn(
+                f"{type(new_obj).__name__}.{new_obj.id}",
+                self.storage.all()
+                )
 
     def test_invalid_json(self):
         """Test invalid json file"""
