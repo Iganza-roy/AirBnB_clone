@@ -205,7 +205,8 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 2 and custom == "count()":
             cls_name = args[0]
             if cls_name in self.__classes:
-                count = sum(1 for obj in storage.all().keys() if obj.split('.')[0] == cls_name)
+                count = sum(1 for obj in storage.all().keys()
+                            if obj.split('.')[0] == cls_name)
                 print(count)
                 return
 
