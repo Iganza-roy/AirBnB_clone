@@ -5,6 +5,7 @@ from models.base_model import BaseModel
 from datetime import datetime
 from models.engine.file_storage import FileStorage
 
+
 class TestBaseModel(unittest.TestCase):
 
     def test_init(self):
@@ -45,7 +46,10 @@ class TestBaseModel(unittest.TestCase):
 
     def test_init_with_kwargs(self):
         """Test __init__ with kwargs."""
-        kwargs = {'id': '123', 'created_at': '2022-01-01T00:00:00.000000', 'updated_at': '2022-01-01T01:00:00.000000'}
+        kwargs = {
+                'id': '123', 'created_at': '2022-01-01T00:00:00.000000',
+                'updated_at': '2022-01-01T01:00:00.000000'
+                }
         n_inst = BaseModel(**kwargs)
         self.assertEqual(n_inst.id, '123')
         self.assertEqual(n_inst.created_at, datetime(2022, 1, 1, 0, 0, 0))
