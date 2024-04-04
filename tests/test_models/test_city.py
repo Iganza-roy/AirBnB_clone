@@ -4,6 +4,7 @@ import unittest
 from models.city import City
 from models.base_model import BaseModel
 
+
 class TestCity(unittest.TestCase):
     """unittests various user methods"""
 
@@ -23,7 +24,9 @@ class TestCity(unittest.TestCase):
         city_inst = City()
         city_dict = city_inst.to_dict()
 
-        expected_keys = set(['id', 'created_at', 'updated_at', 'city_id', 'name'])
+        expected_keys = set(
+                ['id', 'created_at', 'updated_at', 'city_id', 'name']
+                )
         actual_keys = set(city_dict.keys())
 
     def test_city_str_representation(self):
@@ -40,7 +43,6 @@ class TestCity(unittest.TestCase):
         initl_upd_at = city_inst.updated_at
         city_inst.save()
         self.assertNotEqual(initl_upd_at, city_inst.updated_at)
-
 
 
 if __name__ == '__main__':

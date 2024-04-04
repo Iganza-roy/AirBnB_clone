@@ -4,6 +4,7 @@ import unittest
 from models.user import User
 from models.base_model import BaseModel
 
+
 class TestUser(unittest.TestCase):
     """unittests various user methods"""
 
@@ -26,7 +27,10 @@ class TestUser(unittest.TestCase):
         user_inst = User()
         user_dict = user_inst.to_dict()
 
-        expected_keys = set(['id', 'created_at', 'updated_at', 'email', 'password', 'first_name', 'last_name'])
+        expected_keys = set(
+                ['id', 'created_at', 'updated_at', 'email', 'password',
+                    'first_name', 'last_name']
+                )
         actual_keys = set(user_dict.keys())
 
     def test_user_str_representation(self):

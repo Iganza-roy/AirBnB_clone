@@ -4,6 +4,7 @@ import unittest
 from models.state import State
 from models.base_model import BaseModel
 
+
 class TestState(unittest.TestCase):
     """unittests various user methods"""
 
@@ -40,7 +41,6 @@ class TestState(unittest.TestCase):
         initl_upd_at = state_inst.updated_at
         state_inst.save()
         self.assertNotEqual(initl_upd_at, state_inst.updated_at)
-
 
 
 if __name__ == '__main__':

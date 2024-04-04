@@ -4,6 +4,7 @@ import unittest
 from models.review import Review
 from models.base_model import BaseModel
 
+
 class TestReview(unittest.TestCase):
     """unittests various user methods"""
 
@@ -44,7 +45,6 @@ class TestReview(unittest.TestCase):
         initl_upd_at = review_inst.updated_at
         review_inst.save()
         self.assertNotEqual(initl_upd_at, review_inst.updated_at)
-
 
 
 if __name__ == '__main__':
