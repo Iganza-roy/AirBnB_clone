@@ -10,7 +10,7 @@ from models.place import Place
 
 
 class TestConsole(unittest.TestCase):
-    """testing the console"""
+    """testing console.py file"""
 
     def test_help_command(self):
         """Tests the help command."""
